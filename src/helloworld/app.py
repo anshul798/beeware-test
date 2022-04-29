@@ -1,0 +1,28 @@
+import toga
+from .frodokem import FrodoKEM
+
+def button_handler(widget):
+    frodokem = FrodoKEM()
+    (pk, sk) = frodokem.kem_keygen()
+    (ct, ss) = frodokem.kem_encaps(pk)
+    print(ss)
+    print("hello")
+
+
+def build(app):
+    box = toga.Box()
+
+    button = toga.Button('Hello world', on_press=button_handler)
+    button.style.padding = 50
+    button.style.flex = 1
+    box.add(button)
+
+    return box
+
+
+def main():
+    return toga.App('First App', 'org.beeware.helloworld', startup=build)
+
+
+if __name__ == '__main__':
+    main().main_loop()
